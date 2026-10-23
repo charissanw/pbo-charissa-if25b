@@ -1,53 +1,39 @@
 <?php
 
 class Produk {
+    public string $kode;
+    public string $nama;
+    public int $harga;
+    public int $stok;
 
-        //property
-        public string $kode;
-        public string $nama;
-        public int $harga;
-        public int $stok;
-        
-        //constant
-        public const PAJAK = 0.11;
+    public const PAJAK = 0.11;
 
-        public function __construct($kode,$nama,$harga,$stok) {
-                $this->kode = $kode;
-                $this->nama = $nama;
-                $this->harga = $harga;
-                $this->stok = $stok;
-        }
+    public function __construct(string $kodeInput, string $namaInput, int $hargaInput, int $stokInput) {
+        $this->kode = $kodeInput;
+        $this->nama = $namaInput;
+        $this->harga = $hargaInput;
+        $this->stok = $stokInput;
+    }
 
-        public function pajak() {
-                return self::PAJAK * 100;
-        }
+    public function cetakInfo() {
+        $pajak = self::PAJAK * 100;
+        $jumlahpajak = $this->harga * self::PAJAK;
+        $total = $this->harga + $jumlahpajak;
 
-        public function total() {
-                return $this->harga + ($this->harga * self::PAJAK);
-        }
+        echo "produk: " . $this->nama . "<br>";
+        echo "kode: " . $this->kode . "<br>";
+        echo "harga: " . $this->harga . "<br>";
+        echo "stok: " . $this->stok . "<br>";
+        echo "pajak: " . $pajak . "%" . "<br>";
+        echo "total harga setelah pajak: Rp." . $total . "<br>";
+    }
+
+    public function __destruct() {
+        echo "<hr><i>Pesan Destructor: Object '{$this->nama}' telah selesai diproses.</i>";
+    }
 }
 
-//object
-$produk = new Produk('P0001','Laptop',10000000,5);
+$produk = new Produk('P001', 'Laptop', 10000000, 5);
+$produk->cetakInfo();
 
-//hitung harga 
-//$pajak = produk::PAJAK * 100;
-//$jumlahPajak = $produk->harga*produk::PAJAK;
-
-//total
-//$total = $produk->harga * $jumlahPajak;
-
-//hasil
-echo "Produk: ".$produk->nama;
-echo "<br/>";
-
-echo "Harga: ".$produk->harga;
-echo "<br/>";
-
-echo "Stok: ".$produk->stok;
-echo "<br/>";
-
-echo "Pajak: ".$produk->pajak()."%";
-echo "<br/>";
-
-echo " Total harga setelah pajak: Rp. ".$produk->total();
+?>
