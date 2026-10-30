@@ -27,10 +27,6 @@ class Produk {
         echo "pajak: " . $pajak . "%" . "<br>";
         echo "total harga setelah pajak: Rp." . $total . "<br>";
     }
-
-    public function __destruct() {
-        echo "<hr><i>Pesan Destructor: Object '{$this->nama}' telah selesai diproses.</i>";
-    }
 }
 
 $produk = new Produk('P001', 'Laptop', 10000000, 5);
